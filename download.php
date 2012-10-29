@@ -1,9 +1,8 @@
 <?php
 
-
 $file = $value;
 
-$fp = fopen($file, 'w');
+$fp = fopen($file, 'w');							
 
 $ret = ftp_nb_fget($conn_id, $fp, $file, FTP_BINARY);
 
@@ -20,6 +19,6 @@ if ($ret != FTP_FINISHED) {
 	exit(1);
 }
 
-// close filepointer
 fclose($fp);
+
 ?>

@@ -1,11 +1,11 @@
 <?php
 
-
 $file = $value;
 
 $fh = fopen($file, "r");
 
 $ret = ftp_nb_fput($conn_id, $file, $fh, FTP_BINARY);
+
 while ($ret == FTP_MOREDATA) {
 
     $current = ftell($fh);

@@ -13,12 +13,11 @@ $conn_id = ftp_connect($ftp_server);
 
 echo "Connected to $ftp_server\n";
 
-echo "Username for $ftp_server : ";
+echo "Username for $ftp_server: ";
 $ftp_user_name = fgets(STDIN);
 $ftp_user_name = rtrim($ftp_user_name, "\r\n");
 
-echo "Password required for $ftp_user_name : ";
-$ftp_user_pass = fgets(STDIN);
+$ftp_user_pass = get_password("Password required for $ftp_user_name");
 $ftp_user_pass = rtrim($ftp_user_pass, "\r\n");
 
 $login_result = ftp_login($conn_id, $ftp_user_name, $ftp_user_pass);
@@ -66,5 +65,3 @@ while(1)
 }
 
 echo "\n";
-
-// echo 'Username :'

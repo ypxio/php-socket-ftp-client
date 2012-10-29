@@ -1,7 +1,7 @@
 <?php
 
 
-function show_status($done, $total, $size=30) {
+function show_status($done, $total, $size=50) {
 
     static $start_time;
 
@@ -45,4 +45,23 @@ function show_status($done, $total, $size=30) {
         echo "\n";
     }
 
+}
+
+function get_password($prompt)
+{
+   $ostty = `stty -g`;
+   system(
+           "stty -echo -icanon min 1 time 0 2>/dev/null || " .
+           "stty -echo cbreak"
+           );
+
+   echo "$prompt: ";
+
+   // Get rid of newline when reading stdin
+   $r = substr(fgets(STDIN), 0, -1);
+
+   echo "\n";
+   system ("stty $ostty");
+
+   return $r;
 }

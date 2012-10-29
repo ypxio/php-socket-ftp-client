@@ -6,3 +6,5 @@ $buff 	= scandir($dir);
 foreach ($buff as $key => $value) {
 	echo $value."\n";
 }
+
+?>
