@@ -27,6 +27,8 @@ if($login_result)
 	echo "User $ftp_user_name logged in successfully\n";
 }
 
+$current_dir = '/';
+
 while(1)
 {
 	echo "ftp://$ftp_server > ";
@@ -59,6 +61,11 @@ while(1)
 				break;
 			}
 		break;
+
+		case 'cd':
+			$current_dir = $value;
+			ftp_chdir($conn_id,$value);		
+			break;
 	}
 
 	echo "\n";
