@@ -63,8 +63,12 @@ while(1)
 		break;
 
 		case 'cd':
-			$current_dir = $value;
-			ftp_chdir($conn_id,$value);		
+			if($value[0] == '/') $current_dir = $value; else $current_dir = rtrim($current_dir,'/'). '/' .$value;
+			ftp_chdir($conn_id,$current_dir);		
+			break;
+
+		case 'pwd':
+			echo $current_dir;
 			break;
 	}
 
