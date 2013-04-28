@@ -4,15 +4,22 @@ error_reporting(0);
 
 include("def.php");
 
-echo 'ftp host server : ';
+do{
+	echo 'ftp host server : ';
+	$ftp_server = fgets(STDIN);
+	$ftp_server = rtrim($ftp_server, "\r\n");
+	$conn_id = ftp_connect($ftp_server,0,2);
 
-$ftp_server = fgets(STDIN);
-$ftp_server = rtrim($ftp_server, "\r\n");
+	if($conn_id == false){
+		echo "Server can't be connected!\n";
+	} else {
+		echo "Connected To $ftp_server Successfully. \n";
+		break;
+	}
 
-$conn_id = ftp_connect($ftp_server);
+}while(true);
 
-echo "Connected to $ftp_server\n";
-
+do {
 echo "Username for $ftp_server: ";
 $ftp_user_name = fgets(STDIN);
 $ftp_user_name = rtrim($ftp_user_name, "\r\n");
@@ -25,7 +32,11 @@ $login_result = ftp_login($conn_id, $ftp_user_name, $ftp_user_pass);
 if($login_result)
 {
 	echo "User $ftp_user_name logged in successfully\n";
+	break;
 }
+} while(true);
+
+$current_dir = '/';
 
 while(1)
 {
@@ -59,6 +70,15 @@ while(1)
 				break;
 			}
 		break;
+
+		case 'cd':
+			if($value[0] == '/') $current_dir = $value; else $current_dir = rtrim($current_dir,'/'). '/' .$value;
+			ftp_chdir($conn_id,$current_dir);		
+			break;
+
+		case 'pwd':
+			echo $current_dir;
+			break;
 	}
 
 	echo "\n";
